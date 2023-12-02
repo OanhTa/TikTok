@@ -1,4 +1,4 @@
-import Header from "~/Components/Layout/Components/Header/index";
+import Header from "~/Components/Layout/Components/Header/Header/index";
 import Sidebar from "./Sidebar";
 
 import classNames from "classnames/bind";
