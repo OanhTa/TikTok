@@ -1,5 +1,5 @@
-function Home() {
-    return <h1>Home pages</h1>
+function Search() {
+    return <h1>Search</h1>
 }
 
-export default Home;
+export default Search;
