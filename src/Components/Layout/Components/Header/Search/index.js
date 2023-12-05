@@ -29,15 +29,15 @@ function Search() {
 
         setLoading(true);
 
-        const fetchApi = async () =>{
+        const fetchApi = async () => {
             setLoading(true);
-            
-            const result = await searchServices.search(debounced)
+
+            const result = await searchServices.search(debounced);
             setSearchResult(result);
 
             setLoading(false);
-        }
-        fetchApi()
+        };
+        fetchApi();
     }, [debounced]);
 
     const handleClear = () => {
@@ -45,53 +45,68 @@ function Search() {
         setSearchValue(''); //Xóa giá trị input
         inputRef.current.focus();
     };
+
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+        if(!searchValue.startsWith(' ')){
+            setSearchValue(searchValue)
+        }
+    };
+
     const handleHideResult = () => {
         setShowResult(false);
     };
+
+    const handleSubmit =(e)=>{
+        e.preventDefault();
+    }
+
     return (
-        <HeadlessTippy
-            interactive={true}
-            visible={showResult && searchResult.length > 0}
-            render={(attrs) => (
-                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    <ProperWrapper>
-                        <h4 className={cx('search-title')}>Accounts</h4>
-                        {searchResult.map((result) => (
-                            <AccountsItem key={result.id} data={result} />
-                        ))}
-                    </ProperWrapper>
-                </div>
-            )}
-            onClickOutside={handleHideResult}
-        >
-            <div className={cx('search')}>
-                <input
-                    ref={inputRef}
-                    value={searchValue}
-                    placeholder="Gợi ý set đồ cho nữ"
-                    spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    onFocus={() => {
-                        setShowResult(true);
-                    }}
-                />
-
-                {!!searchValue && !loading && (
-                    <button className={cx('clear')} onClick={handleClear}>
-                        {/* Closed */}
-                        <FontAwesomeIcon className={'clear'} icon={faCircleXmark} onClick={() => setSearchValue('')} />
-                    </button>
+        <div>
+            <HeadlessTippy
+                interactive={true}
+                visible={showResult && searchResult.length > 0}
+                render={(attrs) => (
+                    <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+                        <ProperWrapper>
+                            <h4 className={cx('search-title')}>Accounts</h4>
+                            {searchResult.map((result) => (
+                                <AccountsItem key={result.id} data={result} />
+                            ))}
+                        </ProperWrapper>
+                    </div>
                 )}
-
-                {/* Loading */}
-                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-
-                <button className={cx('search-btn')}>
-                    {/* Search */}
-                    <FontAwesomeIcon icon={faSearch} />
-                </button>
-            </div>
-        </HeadlessTippy>
+                onClickOutside={handleHideResult}
+            >
+                <div className={cx('search')}>
+                    <input
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="Gợi ý set đồ cho nữ"
+                        spellCheck={false}
+                        onChange={handleChange}
+                        onFocus={() => {
+                            setShowResult(true);
+                        }}
+                    />
+    
+                    {!!searchValue && !loading && (
+                        <button className={cx('clear')} onClick={handleClear}>
+                            {/* Closed */}
+                            <FontAwesomeIcon className={'clear'} icon={faCircleXmark} onClick={() => setSearchValue('')} />
+                        </button>
+                    )}
+    
+                    {/* Loading */}
+                    {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+    
+                    <button className={cx('search-btn')} onMouseDown={e => e.preventDefault()}>
+                        {/* Search */}
+                        <FontAwesomeIcon icon={faSearch} />
+                    </button>
+                </div>
+            </HeadlessTippy>
+        </div>
     );
 }
 

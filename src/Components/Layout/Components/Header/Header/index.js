@@ -9,11 +9,12 @@ import {
     faUser,
     faCoins,
     faGear,
-    faPlus
+    faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 
+import routesConfig from '~/config/routes';
 import Button from '~/Components/Button';
 import images from '~/Assets/Images';
 import styles from './Header.module.scss';
@@ -22,6 +23,7 @@ import { BoxIcons, MessIcons } from '~/Components/Icons';
 import Image from '~/Components/Images';
 //import 'tippy.js/dist/tippy.css'; // optional
 import Search from '../Search';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -42,6 +44,102 @@ const MENU_ITEM = [
                     code: 'vi',
                     title: 'Tiếng Việt',
                 },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    type: 'languge',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'languge',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                
             ],
         },
     },
@@ -57,7 +155,6 @@ const MENU_ITEM = [
 ];
 
 function Header() {
-    
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
             case 'languge': //handle chage languge
@@ -96,16 +193,21 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img src={images.logo} alt="TikTok" />
-               
-                <Search/>
+                <Link to={routesConfig.home} className={cx('logo-link')}>
+                    <img src={images.logo} alt="TikTok" />
+                </Link>
+
+                {/* SEARCH */}
+                <Search />
 
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
                             <Tippy delay={200} content="Upload video" placement="bottom">
-                                <button className={cx('action-btn') }>
-                                    <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />} >Upload</Button>
+                                <button className={cx('action-btn')}>
+                                    <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+                                        Upload
+                                    </Button>
                                 </button>
                             </Tippy>
 
@@ -124,6 +226,7 @@ function Header() {
                             <Button primary>Log in</Button>
                         </>
                     )}
+                    {/* MENU */}
                     <Menu items={currentUser ? userMenu : MENU_ITEM} onChange={handleMenuChange}>
                         {currentUser ? (
                             <Image
