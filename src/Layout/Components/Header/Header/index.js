@@ -14,7 +14,7 @@ import {
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 
-import routesConfig from '~/config/routes';
+import config from '~/config';
 import Button from '~/Components/Button';
 import images from '~/Assets/Images';
 import styles from './Header.module.scss';
@@ -32,7 +32,7 @@ const MENU_ITEM = [
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'English',
         children: {
-            title: 'English',
+            title: 'Laguage',
             data: [
                 {
                     type: 'languge',
@@ -193,7 +193,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={routesConfig.home} className={cx('logo-link')}>
+                <Link to={config.routes.home} className={cx('logo-link')}>
                     <img src={images.logo} alt="TikTok" />
                 </Link>
 
